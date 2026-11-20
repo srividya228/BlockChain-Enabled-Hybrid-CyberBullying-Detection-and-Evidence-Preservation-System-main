@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blockchain Evidence</title>
+</head>
+<body>
+
+<h2>Blockchain Evidence</h2>
+
+{% for e in blockchain %}
+
+<p>
+Username : {{e.username}} <br>
+Comment : {{e.comment}} <br>
+Hash : {{e.hash}} <br>
+Timestamp : {{e.timestamp}}
+</p>
+
+<hr>
+
+{% endfor %}
+
+</body>
+</html>

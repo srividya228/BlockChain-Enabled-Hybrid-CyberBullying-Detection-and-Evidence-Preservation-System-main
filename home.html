@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Instagram Home</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:black;
+color:white;
+padding-bottom:70px;
+}
+
+.header{
+padding:15px;
+font-size:22px;
+border-bottom:1px solid #333;
+text-align:center;
+}
+
+.post{
+max-width:400px;
+margin:auto;
+margin-bottom:30px;
+}
+
+.user{
+padding:10px;
+font-weight:bold;
+}
+
+.post img{
+width:100%;
+}
+
+.icons{
+padding:10px;
+display:flex;
+gap:15px;
+font-size:22px;
+}
+
+.icons button{
+background:none;
+border:none;
+font-size:22px;
+cursor:pointer;
+color:white;
+}
+
+.liked{
+color:red;
+}
+
+.likes{
+padding-left:10px;
+font-weight:bold;
+}
+
+.caption{
+padding-left:10px;
+}
+
+/* COMMENT PAGE */
+
+.comment-page{
+display:none;
+max-width:400px;
+margin:auto;
+padding:10px;
+padding-bottom:80px;
+}
+
+.comment{
+padding:8px;
+border-bottom:1px solid #333;
+}
+
+.username{
+font-weight:bold;
+}
+
+.comment-input-box{
+position:sticky;
+bottom:0px;
+width:100%;
+background:#111;
+padding:10px;
+display:flex;
+gap:10px;
+}
+
+.comment-input-box input{
+flex:1;
+padding:8px;
+border:none;
+border-radius:5px;
+}
+
+.comment-input-box button{
+background:#3897f0;
+border:none;
+color:white;
+padding:8px 15px;
+cursor:pointer;
+border-radius:5px;
+}
+
+.back{
+margin:10px;
+cursor:pointer;
+color:#4da6ff;
+}
+
+/* NAVBAR */
+
+.navbar{
+position:fixed;
+bottom:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+align-items:center;
+padding:12px 0;
+border-top:1px solid #ddd;
+}
+
+.navbar a{
+text-decoration:none;
+font-size:24px;
+color:black;
+}
+</style>
+
+<script>
+let currentPost = ""
+let username = "{{ user }}"
+
+function like(btn){
+let likes = btn.parentElement.nextElementSibling
+let count = parseInt(likes.innerText)
+
+if(btn.classList.contains("liked")){
+count--
+btn.classList.remove("liked")
+}else{
+count++
+btn.classList.add("liked")
+}
+
+likes.innerText = count + " likes"
+}
+
+/* ✅ UPDATED FUNCTION */
+function openComments(postID){
+document.getElementById("home").style.display="none"
+document.getElementById("commentPage").style.display="block"
+currentPost = postID
+
+let comments = document.querySelectorAll(".comment")
+
+comments.forEach(c => {
+    if(c.getAttribute("data-post") == postID){
+        c.style.display = "block"
+    }else{
+        c.style.display = "none"
+    }
+})
+}
+
+function goBack(){
+document.getElementById("home").style.display="block"
+document.getElementById("commentPage").style.display="none"
+}
+
+function sendComment(){
+let input = document.getElementById("commentInput")
+let text = input.value
+
+if(text=="") return
+
+fetch("/add_comment/"+currentPost,{
+method:"POST",
+headers:{
+"Content-Type":"application/x-www-form-urlencoded"
+},
+body:"comment="+encodeURIComponent(text)
+})
+.then(response => {
+if(response.redirected){
+window.location.href = response.url
+return
+}
+location.reload()
+})
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="header">Instagram</div>
+
+<div id="home">
+
+<div class="post">
+<div class="user">virat_kohli</div>
+<img src="https://picsum.photos/id/1011/600/600">
+<div class="icons">
+<button onclick="like(this)">❤️</button>
+<button onclick="openComments('1')">💬</button>
+<button>➤</button>
+</div>
+<div class="likes">120 likes</div>
+<div class="caption">Training hard 💪</div>
+</div>
+
+<div class="post">
+<div class="user">travel_diary</div>
+<img src="https://picsum.photos/id/1015/600/600">
+<div class="icons">
+<button onclick="like(this)">❤️</button>
+<button onclick="openComments('2')">💬</button>
+<button>➤</button>
+</div>
+<div class="likes">340 likes</div>
+<div class="caption">Nature is beautiful 🌄</div>
+</div>
+
+</div>
+
+<!-- COMMENT PAGE -->
+
+<div id="commentPage" class="comment-page">
+
+<div class="back" onclick="goBack()">⬅ Back</div>
+
+<div id="commentList">
+
+<!-- ✅ UPDATED (ONLY CHANGE HERE) -->
+{% for comment in comments %}
+<div class="comment" data-post="{{ comment['post_id'] }}">
+<span class="username">{{ comment['username'] }}</span> : {{ comment['comment'] }}
+</div>
+{% endfor %}
+
+</div>
+
+<div class="comment-input-box">
+<input type="text" id="commentInput" placeholder="Write a comment...">
+<button onclick="sendComment()">Post</button>
+</div>
+
+</div>
+
+<div class="navbar">
+<a href="/home">🏠</a>
+<a href="/reels">🎬</a>
+<a href="/chat">💬</a>
+<a href="/profile">👤</a>
+</div>
+
+</body>
+</html>

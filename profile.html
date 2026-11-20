@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>InstaSafe - Profile</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<h2 class="top-title">{{ user }}'s Profile</h2>
+
+<div class="feed">
+
+<div class="profile-grid">
+{% for post in posts %}
+<img src="{{ url_for('static', filename=post[3]) }}">
+{% endfor %}
+</div>
+
+</div>
+
+<div class="navbar">
+<a href="/home">🏠</a>
+<a href="/reels">🎬</a>
+<a href="/chat">💬</a>
+<a href="/profile">👤</a>
+</div>
+
+</body>
+</html>

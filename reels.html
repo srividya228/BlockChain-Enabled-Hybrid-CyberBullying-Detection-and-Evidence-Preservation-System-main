@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Instagram Reels</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:black;
+color:white;
+padding-bottom:70px;
+}
+
+.header{
+padding:15px;
+font-size:22px;
+border-bottom:1px solid #333;
+}
+
+.post{
+max-width:400px;
+margin:auto;
+margin-bottom:30px;
+}
+
+.user{
+padding:10px;
+font-weight:bold;
+}
+
+.post img{
+width:100%;
+}
+
+.icons{
+padding:10px;
+display:flex;
+gap:15px;
+font-size:22px;
+}
+
+.icons button{
+background:none;
+border:none;
+font-size:22px;
+cursor:pointer;
+color:white;
+}
+.liked{
+color:red;
+}
+
+.likes{
+padding-left:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.comments-count{
+padding-left:10px;
+cursor:pointer;
+color:#aaa;
+}
+
+.caption{
+padding-left:10px;
+}
+
+.comment-box{
+margin:10px;
+display:none;
+}
+
+.comment-list{
+margin:10px;
+}
+
+input{
+padding:5px;
+width:80%;
+}
+
+.navbar{
+position:fixed;
+bottom:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+align-items:center;
+padding:12px 0;
+border-top:1px solid #ddd;
+}
+
+.navbar a{
+text-decoration:none;
+font-size:24px;
+color:black;
+}
+
+</style>
+
+<script>
+
+function like(btn){
+
+let post = btn.closest(".post")
+
+let likesDiv = post.querySelector(".likes")
+
+let count = parseInt(likesDiv.innerText.split(" ")[0])
+
+if(btn.classList.contains("liked")){
+count--
+btn.classList.remove("liked")
+}else{
+count++
+btn.classList.add("liked")
+}
+
+likesDiv.innerText = count + " likes"
+
+}
+
+function toggleCommentBox(btn){
+
+let post = btn.closest(".post")
+
+let box = post.querySelector(".comment-box")
+
+if(box.style.display=="none" || box.style.display==""){
+box.style.display="block"
+}else{
+box.style.display="none"
+}
+
+}
+
+function addComment(btn){
+
+let post = btn.closest(".post")
+
+let input = post.querySelector(".comment-input")
+
+let comment = input.value
+
+if(comment=="") return
+
+let list = post.querySelector(".comment-list")
+
+let countDiv = post.querySelector(".comments-count")
+
+let count = parseInt(countDiv.innerText.split(" ")[0])
+
+let div=document.createElement("div")
+
+div.innerHTML="<b>You</b>: "+comment
+
+list.appendChild(div)
+
+count++
+
+countDiv.innerText = count + " comments"
+
+input.value=""
+
+}
+
+</script>
+</head>
+
+<body>
+
+<div class="header">Instagram</div>
+
+<div class="post">
+
+<div class="user">virat_kohli</div>
+
+<img src="https://picsum.photos/id/1011/600/600">
+
+<div class="icons">
+<button onclick="like(this)">❤️</button>
+<button onclick="toggleCommentBox(this)">💬</button>
+<button>➤</button>
+</div>
+
+<div class="likes">120 likes</div>
+
+<div class="caption">virat_kohli Training hard 💪</div>
+
+<div class="comments-count">0 comments</div>
+
+<div class="comment-list"></div>
+
+<div class="comment-box">
+<input class="comment-input" placeholder="Add comment">
+<button onclick="addComment(this)">Post</button>
+</div>
+
+</div>
+
+
+<div class="navbar">
+<a href="/home">🏠</a>
+<a href="/reels">🎬</a>
+<a href="/chat">💬</a>
+<a href="/profile">👤</a>
+</div>
+
+</body>
+</html>

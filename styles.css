@@ -1,0 +1,133 @@
+body {
+margin:0;
+font-family:Arial;
+background:#fafafa;
+padding-bottom:60px;
+}
+
+.top-title {
+text-align:center;
+padding:15px;
+background:white;
+border-bottom:1px solid #ddd;
+}
+
+.feed {
+width:500px;
+margin:20px auto;
+}
+
+.post {
+background:white;
+padding:15px;
+margin-bottom:20px;
+border:1px solid #ddd;
+border-radius:5px;
+}
+
+.post-img {
+width:100%;
+margin-top:10px;
+}
+
+textarea, input {
+width:100%;
+padding:8px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+button {
+background:#3897f0;
+color:white;
+border:none;
+padding:8px;
+width:100%;
+cursor:pointer;
+border-radius:4px;
+}
+
+.like-btn {
+text-decoration:none;
+color:#e1306c;
+font-weight:bold;
+}
+
+.safe { color:green; font-weight:bold; }
+.bullying { color:red; font-weight:bold; }
+
+.profile-grid {
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:5px;
+}
+
+.profile-grid img {
+width:100%;
+}
+
+.navbar {
+position:fixed;
+bottom:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:10px 0;
+border-top:1px solid #ddd;
+font-size:22px;
+}
+
+
+body{
+margin:0;
+font-family:Arial;
+background:black;
+color:white;
+}
+
+.header{
+padding:15px;
+font-size:22px;
+border-bottom:1px solid #333;
+}
+
+.post{
+max-width:400px;
+margin:auto;
+margin-bottom:30px;
+}
+
+.user{
+padding:10px;
+font-weight:bold;
+}
+
+.post img{
+width:100%;
+}
+
+.icons{
+padding:10px;
+font-size:22px;
+}
+
+.likes{
+padding-left:10px;
+font-weight:bold;
+}
+
+.caption{
+padding-left:10px;
+}
+
+button{
+background:none;
+border:none;
+color:white;
+font-size:20px;
+cursor:pointer;
+}
+
+

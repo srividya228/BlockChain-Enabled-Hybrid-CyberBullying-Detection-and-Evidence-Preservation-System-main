@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#fafafa;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+width:400px;
+background:white;
+padding:30px;
+border-radius:8px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:1px solid #ddd;
+border-radius:4px;
+font-size:14px;
+}
+
+input:focus{
+border-color:#3897f0;
+outline:none;
+}
+
+button{
+background:#3897f0;
+color:white;
+border:none;
+padding:10px;
+width:100%;
+cursor:pointer;
+border-radius:4px;
+font-size:16px;
+}
+
+button:hover{
+background:#2f7dd6;
+}
+
+.error{
+color:red;
+text-align:center;
+margin-top:10px;
+}
+
+.link{
+text-align:center;
+margin-top:15px;
+}
+
+a{
+color:#3897f0;
+text-decoration:none;
+font-weight:bold;
+}
+
+</style>
+
+<script>
+
+function validateRegister(){
+
+let name=document.getElementById("name").value
+let phone=document.getElementById("phone").value
+let email=document.getElementById("email").value
+let username=document.getElementById("username").value
+let password=document.getElementById("password").value
+let error=document.getElementById("error")
+
+if(name==""||phone==""||email==""||username==""||password==""){
+error.innerText="Please fill all fields"
+return false
+}
+
+if(phone.length!=10){
+error.innerText="Phone number must be 10 digits"
+return false
+}
+
+return true
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Create Account</h2>
+
+<form method="POST" action="/register" onsubmit="return validateRegister()">
+
+<input type="text" id="name" name="name" placeholder="Full Name">
+
+<input type="text" id="phone" name="phone" placeholder="Phone Number">
+
+<input type="email" id="email" name="email" placeholder="Email ID">
+
+<input type="text" id="username" name="username" placeholder="Username">
+
+<input type="password" id="password" name="password" placeholder="Password">
+
+<button type="submit">Register</button>
+
+</form>
+
+<p id="error" class="error"></p>
+
+<div class="link">
+Already have an account? <a href="/login">Login</a>
+</div>
+
+</div>
+
+</body>
+</html>
